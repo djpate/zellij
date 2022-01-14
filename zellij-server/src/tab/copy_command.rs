@@ -28,11 +28,7 @@ impl CopyCommand {
             Ok(process) => process,
         };
 
-        match process
-            .stdin
-            .unwrap()
-            .write_all(value.to_string().as_bytes())
-        {
+        match process.stdin.unwrap().write_all(value.as_bytes()) {
             Err(why) => {
                 eprintln!("couldn't write to {} stdin: {}", self.command, why);
                 false
